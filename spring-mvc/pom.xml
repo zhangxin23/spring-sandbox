@@ -10,7 +10,36 @@
     <artifactId>spring-mvc</artifactId>
     <packaging>war</packaging>
 
+    <properties>
+        <jetty.port>60000</jetty.port>
+        <jetty.stopPort>60001</jetty.stopPort>
+        <app.name>spring-mvc</app.name>
+    </properties>
+
     <build>
-        <finalName>spring-mvc</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.14.v20131031</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <reload>manual</reload>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>${jetty.port}</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <webAppConfig>
+                        <contextPath>/${app.name}</contextPath>
+                        <overrideDescriptor>src/main/webapp/WEB-INF/web.xml</overrideDescriptor>
+                    </webAppConfig>
+                    <stopPort>${jetty.stopPort}</stopPort>
+                    <stopKey>jetty</stopKey>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>${app.name}</finalName>
     </build>
 </project>
