@@ -1,6 +1,5 @@
 package com.sandbox.spring.controller;
 
-import com.sandbox.spring.model.City;
 import com.sandbox.spring.service.CityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

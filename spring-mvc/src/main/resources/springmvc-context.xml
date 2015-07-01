@@ -11,32 +11,42 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/scheme/context/spring-context-3.0.xsd">
 
-       <context:property-placeholder location="classpath:jdbc.properties,classpath:mybatis.properties" />
+        <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
 
-       <!-- Enable annotation style of managing transactions -->
-       <tx:annotation-driven transaction-manager="transactionManager" />
+        <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath:jdbc.properties</value>
+                </list>
+            </property>
+        </bean>
 
-       <!-- Declare a datasource that has pooling capabilities -->
-       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-             destroy-method="close" p:driverClass="${app.jdbc.driverClassName}"
-             p:jdbcUrl="${app.jdbc.url}" p:user="${app.jdbc.username}" p:password="${app.jdbc.password}"
-             p:acquireIncrement="10" p:idleConnectionTestPeriod="60" p:maxPoolSize="100"
-             p:maxStatements="50" p:minPoolSize="10" />
+        <tx:annotation-driven transaction-manager="transactionManager" />
 
-       <!-- Declare a transaction manager -->
-       <bean id="transactionManager"
-             class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+             p:driverClass="${jdbc.driverClassName}"
+             p:jdbcUrl="${jdbc.url}"
+             p:user="${jdbc.username}"
+             p:password="${jdbc.password}"
+             p:acquireIncrement="10"
+             p:idleConnectionTestPeriod="60"
+             p:maxPoolSize="100"
+             p:maxStatements="50"
+             p:minPoolSize="10" />
+
+        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
              p:dataSource-ref="dataSource" />
 
-       <!-- define the SqlSessionFactory, notice that configLocation is not needed when you use MapperFactoryBean -->
-       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-              <property name="dataSource" ref="dataSource" />
-              <property name="configLocation" value="WEB-INF/mybatis/sqlmap-config.xml" />
-       </bean>
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+            <property name="dataSource" ref="dataSource" />
+            <property name="mapperLocations">
+                <array>
+                    <value>classpath:mybatis/CityMapper.xml</value>
+                </array>
+            </property>
+        </bean>
 
-       <!-- scan for mappers and let them be autowired -->
-       <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-              <property name="basePackage" value="${MapperInterfacePackage}" />
-       </bean>
-
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="basePackage" value="com.sandbox.spring.mybatis.mapper" />
+        </bean>
 </beans>

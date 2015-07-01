@@ -7,15 +7,15 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * Date:   15-6-30
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class City {
+public class CityResult {
     private String name;
     private Integer population;
     private String province;
 
-    public City() {
+    public CityResult() {
     }
 
-    public City(String name, Integer population, String province) {
+    public CityResult(String name, Integer population, String province) {
         this.name = name;
         this.population = population;
         this.province = province;
