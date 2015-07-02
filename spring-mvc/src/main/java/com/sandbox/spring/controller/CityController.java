@@ -21,6 +21,6 @@ public class CityController {
     @RequestMapping(method= RequestMethod.GET)
     @ResponseBody
     public Object getCity(Integer id) {
-        return cityService.get(1);
+        return cityService.get(id);
     }
 }
