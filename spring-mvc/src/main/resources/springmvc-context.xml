@@ -49,4 +49,16 @@
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
             <property name="basePackage" value="com.sandbox.spring.mybatis.mapper" />
         </bean>
+
+        <bean id="connectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
+            <property name="brokerURL" value="tcp://localhost:61616"/>
+        </bean>
+
+        <bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+            <constructor-arg value="sandbox.queue" />
+        </bean>
+
+        <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+            <property name="connectionFactory" ref="connectionFactory" />
+        </bean>
 </beans>
