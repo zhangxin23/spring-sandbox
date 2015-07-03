@@ -60,5 +60,6 @@
 
         <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
             <property name="connectionFactory" ref="connectionFactory" />
+            <property name="defaultDestinationName" value="sandbox.queue"/>
         </bean>
 </beans>

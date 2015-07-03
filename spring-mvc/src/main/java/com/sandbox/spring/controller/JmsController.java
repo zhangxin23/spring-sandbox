@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
@@ -19,12 +20,14 @@ public class JmsController {
     @Resource(name = "jmsService")
     private JmsService jmsService;
 
-    @RequestMapping(value = "/sendMsg", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
     public void sendMsg(String msg) {
         jmsService.sendMsg(msg);
     }
 
-    @RequestMapping(value = "/getMsg", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
     public String getMsg() {
         return jmsService.getMsg();
     }
