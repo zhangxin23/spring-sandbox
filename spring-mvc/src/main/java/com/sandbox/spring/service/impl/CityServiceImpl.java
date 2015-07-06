@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Author: zhangxin
  * Date:   15-6-30
  */
-@Service(value = "cityService")
+//@Service(value = "cityService")
 public class CityServiceImpl implements CityService {
     @Autowired
     private CityDao cityDao;

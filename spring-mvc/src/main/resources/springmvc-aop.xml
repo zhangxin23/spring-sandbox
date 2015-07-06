@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <bean id="aopAdvisor" class="com.sandbox.spring.aop.AopAdvisor"/>
+
+    <aop:config>
+        <aop:aspect ref="aopAdvisor">
+            <aop:pointcut id="action" expression="execution(* com.sandbox.spring.service.impl.CityServiceImpl.get(..))"/>
+            <aop:before pointcut-ref="action" method="beforeAction"/>
+            <aop:after-returning pointcut-ref="action" method="afterAction"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

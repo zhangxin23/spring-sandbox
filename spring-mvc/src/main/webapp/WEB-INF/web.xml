@@ -11,6 +11,7 @@
             classpath:springmvc-context.xml
             classpath:springmvc-dao.xml
             classpath:springmvc-service.xml
+            classpath:springmvc-aop.xml
         </param-value>
     </context-param>
     
