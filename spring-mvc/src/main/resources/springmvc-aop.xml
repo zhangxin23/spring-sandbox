@@ -5,9 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <bean id="aopAdvisorAnnotation" class="com.sandbox.spring.aop.AopAdvisorAnnotation"/>
 
     <bean id="aopAdvisor" class="com.sandbox.spring.aop.AopAdvisor"/>
 
@@ -16,6 +18,10 @@
             <aop:pointcut id="action" expression="execution(* com.sandbox.spring.service.impl.CityServiceImpl.get(..))"/>
             <aop:before pointcut-ref="action" method="beforeAction"/>
             <aop:after-returning pointcut-ref="action" method="afterAction"/>
+            <aop:around pointcut-ref="action" method="aroundAction"/>
+
+            <aop:before pointcut="execution(* com.sandbox.spring.service.impl.CityServiceImpl.get(Integer)) and args(id)"
+                        method="interceptArgs" arg-names="id"/>
         </aop:aspect>
     </aop:config>
 
