@@ -12,6 +12,7 @@
             classpath:springmvc-dao.xml
             classpath:springmvc-service.xml
             classpath:springmvc-aop.xml
+            classpath:springmvc-freemarker.xml
         </param-value>
     </context-param>
     
