@@ -26,4 +26,20 @@ public class CityDaoImpl implements CityDao {
             return cityList.get(0);
         return null;
     }
+
+    @Override
+    public City get(String name) {
+        CityExample example = new CityExample();
+        CityExample.Criteria criteria = example.createCriteria();
+        criteria.andNameEqualTo(name);
+        List<City> cityList = cityMapper.selectByExample(example);
+        if(cityList.size() > 0)
+            return cityList.get(0);
+        return null;
+    }
+
+    @Override
+    public int insert(City city) {
+        return cityMapper.insert(city);
+    }
 }

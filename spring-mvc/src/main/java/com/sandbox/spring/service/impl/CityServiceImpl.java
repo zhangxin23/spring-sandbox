@@ -24,4 +24,18 @@ public class CityServiceImpl implements CityService {
 
         return new CityResult(city.getName(), city.getPopulation(), city.getProvince());
     }
+
+    @Override
+    public Object get(String name) {
+        City city = cityDao.get(name);
+        if(city == null)
+            throw new IllegalArgumentException("There is no this city.");
+
+        return new CityResult(city.getName(), city.getPopulation(), city.getProvince());
+    }
+
+    @Override
+    public int insert(City city) {
+        return cityDao.insert(city);
+    }
 }

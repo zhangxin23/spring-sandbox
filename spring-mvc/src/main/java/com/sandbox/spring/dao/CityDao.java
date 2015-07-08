@@ -8,4 +8,7 @@ import com.sandbox.spring.mybatis.pojo.City;
  */
 public interface CityDao {
     City get(Integer id);
+    City get(String name);
+
+    int insert(City city);
 }

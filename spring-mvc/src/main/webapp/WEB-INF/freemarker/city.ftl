@@ -7,7 +7,19 @@
     </H2>
 </div>
 
-<div id="content">
+<div id="setContent">
+    <fieldset>
+        <legend>设置</legend>
+        <form name="cityAdd" action="add" method="post">
+            名字: <input type="text" name="name" /> <br/>
+            人口: <input type="text" name="population" /> <br/>
+            省份: <input type="text" name="province" /> <br/>
+            <input type="submit" value="Add" />
+        </form>
+    </fieldset>
+</div>
+
+<div id="queryContent">
     <fieldset>
         <legend>查询</legend>
         <form name="city" action="query" method="get">
