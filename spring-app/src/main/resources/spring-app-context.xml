@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="stuA" class="com.sandbox.spring.app.Student">
+        <constructor-arg name="id" value="1"/>
+        <constructor-arg name="name" value="A"/>
+        <constructor-arg name="professional" value="Computer"/>
+    </bean>
+
+    <bean id="stuB" class="com.sandbox.spring.app.Student">
+        <constructor-arg name="id" value="2"/>
+        <constructor-arg name="name" value="B"/>
+        <constructor-arg name="professional" value="Math"/>
+    </bean>
+
+    <bean id="school" class="com.sandbox.spring.app.School">
+        <constructor-arg name="name" value="school"/>
+        <constructor-arg name="total" value="2"/>
+        <constructor-arg name="students">
+            <set>
+                <ref bean="stuA"/>
+                <ref bean="stuB"/>
+            </set>
+        </constructor-arg>
+        <constructor-arg name="valueList">
+            <set>
+                <value type="int">1</value>
+                <value type="int">2</value>
+                <value type="int">3</value>
+            </set>
+        </constructor-arg>
+    </bean>
+
+</beans>
