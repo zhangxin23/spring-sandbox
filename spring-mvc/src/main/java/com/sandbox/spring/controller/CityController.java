@@ -32,6 +32,15 @@ public class CityController {
         return cityService.get(name);
     }
 
+    @RequestMapping(value = "empty", method = RequestMethod.POST)
+    @ResponseBody
+    public Object testEmptyStringParam(@RequestParam(value = "param")Integer param) {
+        if(param == null)
+            return "param is null.";
+        else
+            return "param is not null.";
+    }
+
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public Object freemarkerIndex() {
         return "city";
